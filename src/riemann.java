@@ -2,12 +2,15 @@
  * Created by Yohel Munoz on 16/06/2017.
  */
 
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Scanner;
 import java.lang.Math;
 
 public class riemann{
     public static void main(String[] args) {
-        pedirDigitos();
+        interfaz();
     }
 
     public static double elevarALaN(double x, double expon){
@@ -41,13 +44,14 @@ public class riemann{
         return result;
     }
 
-    private static void pedirDigitos(){
+    private static void pedirDigitos(double a, double b, double error){
 
-        Scanner reader = new Scanner(System.in);  // Reading from System.in
+        /*Scanner reader = new Scanner(System.in);  // Reading from System.in
         System.out.println("Ingrese 'a':");
-        double a = reader.nextDouble(); // Scans the next token of the input
+        a = reader.nextDouble(); // Scans the next token of the input
         System.out.println("Ingrese 'b' (mayor que a):");
-        double b = reader.nextDouble();
+        b = reader.nextDouble();
+
 
         while (a > b){
             System.out.println("Error. Ingresó 'a' mayor que 'b'. Vuelva a ingresar los datos:");
@@ -58,10 +62,13 @@ public class riemann{
         }
 
         System.out.println("Ingrese error (use coma decimal):");
-        double error = reader.nextDouble();
+        error = reader.nextDouble();
+        */
 
-        System.out.println("¿Cuál tipo de funcion desea ingresar? Digite: 1 para x^n ó 2 para una función polinómica:");
-        int tipoFuncion = reader.nextInt();
+        //System.out.println("¿Cuál tipo de funcion desea ingresar? Digite: 1 para x^n ó 2 para una función polinómica:");
+        //int tipoFuncion = reader.nextInt();
+        Object arreglo[] = { "x^n", "Funcion plinomica" };
+        int tipoFuncion = JOptionPane.showOptionDialog(null, "Tipo de funcion", "¿Cuál tipo de funcion desea ingresar?", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, arreglo, arreglo[0]);
 
         double valor = error+1;
         double n = 1;
@@ -79,9 +86,10 @@ public class riemann{
         double minimoAcum = 0;
         String funcion = "";
 
-        if (tipoFuncion == 1){
-            System.out.println("Ingrese la función (por ejemplo x^2):");
-            funcion = reader.next();
+        if (tipoFuncion == 0){
+            //System.out.println("Ingrese la función (por ejemplo x^2):");
+            //funcion = reader.next();
+            funcion = JOptionPane.showInputDialog(null, "Ingrese la función (por ejemplo x^2):", "Tipo x^n", JOptionPane.PLAIN_MESSAGE);
             exponente = getN(funcion);
 
             while (valor >= error){
@@ -99,8 +107,6 @@ public class riemann{
                     sumatoria += (maximo-minimo);
                     minimoAcum += minimo;
                 }
-
-
                 valor = m*sumatoria;
                 n++;
             }
@@ -109,8 +115,9 @@ public class riemann{
 
         }
         else {
-            System.out.println("Ingrese los coeficientes de la función separados por comas (por ejemplo 2,4,0,3 para 2x^3+4x^2+3):");
-            funcion = reader.next();
+            //System.out.println("Ingrese los coeficientes de la función separados por comas (por ejemplo 2,4,0,3 para 2x^3+4x^2+3):");
+            //funcion = reader.next();
+            funcion = JOptionPane.showInputDialog(null, "Ingrese los coeficientes de la función separados por comas (por ejemplo 2,4,0,3 para 2x^3+4x^2+3)", "Tipo polinomio", JOptionPane.PLAIN_MESSAGE);
             String funcTemporal = "";
             for (int i = 0; i < funcion.length(); i++) {
                 //while (funcion.charAt(i) != ','){
@@ -143,7 +150,68 @@ public class riemann{
             resultado = m*minimoAcum;
         }
 
-        System.out.println("El área bajo la curva es: " + resultado);
-        System.out.println("Con " + n + " rectángulos.");
+        //System.out.println("El área bajo la curva es: " + resultado);
+        //System.out.println("Con " + n + " rectángulos.");
+        JOptionPane.showMessageDialog(null, "El área bajo la curva es: " + resultado + "\n" + "Con " + n + " rectángulos.", "Resultado", JOptionPane.PLAIN_MESSAGE);
+    }
+
+    public static void interfaz(){
+
+        JFrame f=new JFrame();
+        f.setBounds(700,400,400,220);
+        f.setVisible(true);
+        f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        JTextField fieldA = new JTextField();
+        JTextField fieldB = new JTextField();
+        JTextField fieldError = new JTextField();
+
+        JButton confirmar = new JButton();
+
+        JLabel labelA = new JLabel("Ingrese 'a':");
+        JLabel labelB = new JLabel("Ingrese 'b' (mayor que a):");
+        JLabel labelError = new JLabel("Ingrese error (use coma decimal):");
+        JLabel labelConfirmar = new JLabel("Confirmar datos");
+        JLabel labelInstrucciones = new JLabel("Ingrese todos los datos antes de confirmar");
+
+
+        f.add(fieldA);
+        f.add(fieldB);
+        f.add(fieldError);
+        f.add(confirmar);
+        f.add(labelA);
+        f.add(labelB);
+        f.add(labelError);
+        confirmar.add(labelConfirmar);
+        f.add(labelInstrucciones);
+        f.setTitle("Ingreso de digitos");
+
+        fieldA.setBounds(220,10,150,20);
+        fieldB.setBounds(220,35,150,20);
+        fieldError.setBounds(220,60,150,20);
+        confirmar.setBounds(130,140,120,20);
+        labelA.setBounds(140,10,180,20);
+        labelB.setBounds(60,35,180,20);
+        labelError.setBounds(10,60,250,20);
+        labelConfirmar.setBounds(14,0,120,20);
+        labelInstrucciones.setBounds(70,110,250,20);
+
+
+        confirmar.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                try {
+                    double a = Double.parseDouble(fieldA.getText());
+                    double b = Double.parseDouble(fieldB.getText());
+                    double error = Double.parseDouble(fieldError.getText());
+                    if(a>b){
+                    }else {
+                        f.dispose();
+                        pedirDigitos(a, b, error);
+                    }
+                } catch (NumberFormatException exept) {}
+            }
+        });
     }
 }
