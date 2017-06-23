@@ -3,6 +3,7 @@
  */
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Scanner;
@@ -67,8 +68,8 @@ public class riemann{
 
         //System.out.println("¿Cuál tipo de funcion desea ingresar? Digite: 1 para x^n ó 2 para una función polinómica:");
         //int tipoFuncion = reader.nextInt();
-        Object arreglo[] = { "x^n", "Funcion plinomica" };
-        int tipoFuncion = JOptionPane.showOptionDialog(null, "Tipo de funcion", "¿Cuál tipo de funcion desea ingresar?", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, arreglo, arreglo[0]);
+        Object arreglo[] = { "x^n", "Función polinómica" };
+        int tipoFuncion = JOptionPane.showOptionDialog(null, "Tipo de función", "¿Cuál tipo de función desea ingresar?", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, arreglo, arreglo[0]);
 
         double valor = error+1;
         double n = 1;
@@ -155,10 +156,10 @@ public class riemann{
         JOptionPane.showMessageDialog(null, "El área bajo la curva es: " + resultado + "\n" + "Con " + n + " rectángulos.", "Resultado", JOptionPane.PLAIN_MESSAGE);
     }
 
-    public static void interfaz(){
+    public static void interfaz() {
 
-        JFrame f=new JFrame();
-        f.setBounds(700,400,400,220);
+        JFrame f = new JFrame();
+        f.setBounds(700, 400, 400, 220);
         f.setVisible(true);
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -170,8 +171,8 @@ public class riemann{
 
         JLabel labelA = new JLabel("Ingrese 'a':");
         JLabel labelB = new JLabel("Ingrese 'b' (mayor que a):");
-        JLabel labelError = new JLabel("Ingrese error (use coma decimal):");
-        JLabel labelConfirmar = new JLabel("Confirmar datos");
+        JLabel labelError = new JLabel("Ingrese error (use punto decimal):");
+        JLabel labelConfirmar = new JLabel("Confirmar");
         JLabel labelInstrucciones = new JLabel("Ingrese todos los datos antes de confirmar");
 
 
@@ -184,18 +185,20 @@ public class riemann{
         f.add(labelError);
         confirmar.add(labelConfirmar);
         f.add(labelInstrucciones);
-        f.setTitle("Ingreso de digitos");
+        f.setTitle("Ingreso de dígitos");
 
-        fieldA.setBounds(220,10,150,20);
-        fieldB.setBounds(220,35,150,20);
-        fieldError.setBounds(220,60,150,20);
-        confirmar.setBounds(130,140,120,20);
-        labelA.setBounds(140,10,180,20);
-        labelB.setBounds(60,35,180,20);
-        labelError.setBounds(10,60,250,20);
-        labelConfirmar.setBounds(14,0,120,20);
-        labelInstrucciones.setBounds(70,110,250,20);
+        fieldA.setBounds(220, 10, 150, 20);
+        fieldB.setBounds(220, 35, 150, 20);
+        fieldError.setBounds(220, 60, 150, 20);
+        confirmar.setBounds(130, 140, 96, 20);
+        labelA.setBounds(140, 10, 180, 20);
+        labelB.setBounds(60, 35, 180, 20);
+        labelError.setBounds(10, 60, 250, 20);
+        labelConfirmar.setBounds(14, 0, 200, 20);
+        labelInstrucciones.setBounds(70, 110, 250, 20);
 
+        //labelConfirmar.setLayout(null);
+        f.setLayout(null);
 
         confirmar.addActionListener(new ActionListener()
         {
