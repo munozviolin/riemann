@@ -170,7 +170,7 @@ public class riemann{
 
         JLabel labelA = new JLabel("Ingrese 'a':");
         JLabel labelB = new JLabel("Ingrese 'b' (mayor que a):");
-        JLabel labelError = new JLabel("Ingrese error (use coma decimal):");
+        JLabel labelError = new JLabel("Ingrese error (use punto decimal):");
         JLabel labelConfirmar = new JLabel("Confirmar datos");
         JLabel labelInstrucciones = new JLabel("Ingrese todos los datos antes de confirmar");
 
